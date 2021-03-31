@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+html,
+body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+
+	//background-color: #131313;
+}
+
+table,
+tr,
+th,
+td,
+button {
+	margin: 0;
+	padding: 0;
+	border-spacing: 0;
+}
+
+h1 {
+	font-size: 3em;
+	font-weight: 200;
+}
+
+:root {
+	--text: black;
+	--light-text: white;
+	--placeholder-color: #7e7e7e;
+	--disabled-color: #494949;
+	--button-color: #fff;
+
+	--split-flap-border-color: black;
+	--split-flap-background-color: #252525;
+
+	--red: #fe0100;
+	--green: #01cc34;
+	--soft-red: #fc4a4a;
+	--soft-green: #39d460;
+}

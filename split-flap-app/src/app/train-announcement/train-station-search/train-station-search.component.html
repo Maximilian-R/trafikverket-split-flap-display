@@ -1,0 +1,31 @@
+<div
+	appArrowSelector
+	[counter]="selected"
+	[min]="0"
+	[max]="hits.length - 1"
+	[loop]="true"
+	[inverted]="true"
+	(selected)="preselect($event)"
+	(focusin)="focusin()"
+	(clickOutside)="clickOutside($event)"
+>
+	<app-search
+		[value]="search"
+		(cleared)="clear()"
+		(submitted)="select()"
+		[placeholder]="'Sök station'"
+		[valid]="valid"
+		[loading]="isSearching"
+		(input)="input($event.target.value)"
+		(keyup.Esc)="close()"
+	></app-search>
+	<app-dropdown-list [isOpen]="dropdownOpen && hits.length > 0" [index]="selected">
+		<li
+			*ngFor="let trainStation of hits; let i = index"
+			(mousedown)="select()"
+			(mouseover)="preselect(i)"
+			[class.selected]="i === selected"
+			[innerHTML]="trainStation.AdvertisedLocationName | strongText: lastTyped"
+		></li>
+	</app-dropdown-list>
+</div>

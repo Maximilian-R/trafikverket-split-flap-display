@@ -1,0 +1,129 @@
+.frame {
+	--background-color-tint: hsl(0, 0%, 10%);
+	--background-color: hsl(0, 0%, 20%);
+
+	--text-color: rgb(255, 255, 255);
+	--text-color-tint: rgb(230, 230, 230);
+}
+
+.white,
+.yellow {
+	--text-color: #2c2c2c;
+	--text-color-tint: #505050;
+}
+
+.white {
+	--background-color-tint: #d4d4d4;
+	--background-color: #ffffff;
+}
+
+.red {
+	--background-color-tint: hsl(330, 100%, 40%);
+	--background-color: hsl(330, 100%, 60%);
+}
+
+.green {
+	--background-color-tint: hsl(150, 100%, 40%);
+	--background-color: hsl(150, 100%, 60%);
+}
+
+.blue {
+	--background-color-tint: hsl(200, 100%, 40%);
+	--background-color: hsl(200, 100%, 60%);
+}
+
+.yellow {
+	--background-color-tint: hsl(60, 100%, 40%);
+	--background-color: hsl(60, 100%, 60%);
+}
+
+:host {
+	display: flex;
+	justify-content: center;
+	margin: 1em;
+}
+
+.frame {
+	background: var(--split-flap-border-color);
+	padding: 0.5em;
+}
+
+.inner {
+	padding: 0.2em;
+	background-color: var(--split-flap-background-color);
+	color: var(--text-color);
+	font-size: 1em;
+	text-align: left;
+}
+
+table {
+	border-collapse: collapse;
+
+	td {
+		padding-top: 0.2em;
+		padding-bottom: 0.2em;
+
+		&:not(:last-child) {
+			padding-right: 0.5em;
+		}
+	}
+}
+
+tr:hover .row {
+	--background-color-tint: var(--row-hover-color);
+	--background-color: var(--row-hover-color-tint);
+}
+
+.row {
+	display: flex;
+	gap: 0.2em;
+	overflow: hidden;
+}
+
+.letter {
+	font-family: 'Roboto Mono', monospace;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0.05em;
+	flex-shrink: 0;
+}
+
+// .letter::before,
+// .letter::after {
+// 	content: '';
+// 	position: absolute;
+// 	left: 0px;
+// 	top: calc(50% - 10%);
+// 	height: 20%;
+// 	width: 2px;
+// 	background-color: black;
+// 	z-index: 10;
+// }
+
+// .letter::after {
+// 	right: 0px;
+// 	left: unset;
+// }
+
+.letter > div > div {
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+	white-space: pre;
+	user-select: none;
+}
+
+.letter > :first-child {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	z-index: 1;
+}
+
+.letter > :last-child {
+	background-color: var(--background-color-tint);
+	color: var(--text-color-tint);
+	position: absolute;
+	top: 0;
+	height: 50%;
+	z-index: 2;
+	overflow: hidden;
+}

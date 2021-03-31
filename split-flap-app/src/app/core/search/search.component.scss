@@ -1,0 +1,65 @@
+.search {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	font-weight: 300;
+	background: var(--split-flap-background-color);
+	color: var(--light-text);
+	border-radius: 0.2em;
+	padding: 0.3em 0.5em;
+	display: flex;
+	align-items: center;
+
+	button {
+		display: flex;
+		font-size: 1em;
+		font-family: inherit;
+		color: var(--placeholder-color);
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+
+		&:disabled {
+			cursor: inherit;
+		}
+
+		&:hover:enabled {
+			color: var(--soft-red);
+		}
+	}
+
+	fa-icon {
+		font-size: 0.7em;
+
+		&.undefined {
+			color: var(--placeholder-color);
+		}
+
+		&.valid {
+			color: var(--soft-green);
+		}
+
+		&.error {
+			color: var(--soft-red);
+		}
+	}
+}
+
+input {
+	flex-grow: 1;
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: 300;
+	border-radius: 0;
+	padding: 0;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	outline: none;
+	border: none;
+	background: none;
+	color: var(--light-text);
+
+	&::placeholder {
+		color: var(--placeholder-color);
+	}
+}

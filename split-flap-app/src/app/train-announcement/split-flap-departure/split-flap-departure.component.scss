@@ -1,0 +1,56 @@
+:host {
+	font-size: 1.5rem;
+	font-family: 'Raleway', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 8rem;
+}
+
+app-train-station-search {
+	font-size: 1.5em;
+	z-index: 20;
+}
+
+caption {
+	position: relative;
+	color: #fff;
+	text-align: left;
+
+	> label {
+		font-size: 1.5em;
+	}
+}
+
+th {
+	font-size: 0.6em;
+	padding-bottom: 1em;
+	> label {
+		display: block;
+	}
+}
+
+.loading-icon {
+	position: absolute;
+	top: 0.2em;
+	right: 0.2em;
+	width: 0.75em;
+	height: 0.75em;
+	border-radius: 50%;
+	background-color: black;
+}
+
+.load {
+	animation: flashing 0.5s infinite ease-in-out alternate;
+}
+
+.EN {
+	color: hsl(60, 100%, 60%);
+}
+
+@keyframes flashing {
+	100% {
+		background-color: hsl(60, 100%, 60%);
+		box-shadow: 0 0 6px 2px hsl(60, 100%, 60%);
+	}
+}

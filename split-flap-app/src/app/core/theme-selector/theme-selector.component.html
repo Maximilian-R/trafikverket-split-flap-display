@@ -1,0 +1,6 @@
+<div class="theme-selector">
+	<label *ngFor="let theme of themes" class="radio-button" [style.--color]="theme.color" [style.--color-tint]="theme.colorTint">
+		<input type="radio" name="radio-theme" (change)="select(theme)" />
+		<div class="checkmark"></div>
+	</label>
+</div>

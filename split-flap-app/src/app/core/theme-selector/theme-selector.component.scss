@@ -1,0 +1,48 @@
+.theme-selector {
+	font-size: 0.5rem;
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin: 1rem 1rem;
+
+	--background-color: #fff;
+	--color-tint: rgb(138, 0, 0);
+	--color: rgb(255, 0, 0);
+}
+
+.radio-button {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+
+	input {
+		display: none;
+	}
+
+	&:hover input ~ .checkmark::after {
+		background-color: var(--color-tint);
+	}
+
+	input:checked ~ .checkmark::after {
+		background-color: var(--color);
+	}
+}
+
+.checkmark {
+	height: 2em;
+	width: 2em;
+	background-color: var(--background-color);
+	border-radius: 50%;
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0.25em;
+		left: 0.25em;
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 50%;
+	}
+}

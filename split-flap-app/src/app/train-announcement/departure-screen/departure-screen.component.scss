@@ -1,0 +1,118 @@
+.departure-sign {
+	margin: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	box-shadow: 2px 2px 1px 1px #111;
+	background-color: #333;
+	color: #fff;
+	font-family: 'Roboto Mono', monospace;
+	padding: 1rem;
+	width: 30rem;
+	border-radius: 0.5rem;
+
+	> div {
+		background-color: #111;
+		padding: 0.5rem;
+		display: flex;
+		flex-direction: row;
+		border-radius: 0.1rem;
+	}
+}
+
+.departure-screen {
+	flex-grow: 1;
+	background: linear-gradient(
+		145deg,
+		rgba(19, 94, 22, 1) 0%,
+		rgba(24, 115, 27, 1) 12%,
+		rgba(24, 91, 26, 1) 27%,
+		rgba(25, 119, 29, 1) 88%,
+		rgba(11, 68, 14, 1) 100%
+	);
+	color: #ffff6b;
+	overflow: hidden;
+	white-space: nowrap;
+	//text-shadow: 0px 0px 0.3rem #ffff6b;
+
+	.screen {
+		padding: 0 0.2rem;
+	}
+
+	.screen-divider {
+		background-color: #111;
+		height: 1rem;
+	}
+
+	.departure-info {
+		display: flex;
+		justify-content: space-between;
+		font-size: 1rem;
+		height: 1.5rem;
+		//line-height: 1.5rem;
+		gap: 1rem;
+	}
+
+	.destination {
+		height: 3rem;
+		//line-height: 3rem;
+		font-size: 2rem;
+	}
+
+	.passby {
+		display: inline-block;
+		font-size: 1rem;
+		height: 1.5rem;
+		//line-height: 1.25rem;
+		gap: 1rem;
+		:not(:last-child) {
+			margin-right: 0.5rem;
+		}
+	}
+
+	.extra {
+		display: inline-block;
+		gap: 1rem;
+		font-size: 1rem;
+		height: 1.5rem;
+		//line-height: 1.25rem;
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.departure-track {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 0;
+	flex-shrink: 0;
+	justify-content: center;
+	margin-right: 0.5rem;
+
+	text-shadow: 0px 0px 1rem white;
+
+	> label {
+		font-weight: 600;
+		font-size: 1rem;
+	}
+
+	> div {
+		font-size: 3rem;
+	}
+}
+
+.scroll {
+	transform: translateX(0);
+	animation: scroll 10s linear infinite;
+}
+
+/* Move it (define the animation) */
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
