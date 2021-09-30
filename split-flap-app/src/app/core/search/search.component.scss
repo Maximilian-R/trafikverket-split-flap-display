@@ -2,10 +2,11 @@
 	font-family: 'Raleway', sans-serif;
 	font-size: 1em;
 	font-weight: 300;
-	background: var(--split-flap-background-color);
-	color: var(--light-text);
+	background: var(--input-bg-color);
+	color: var(--text-color);
 	border-radius: 0.2em;
-	padding: 0.3em 0.5em;
+	padding: 0 1em;
+	height: 2em;
 	display: flex;
 	align-items: center;
 
@@ -57,7 +58,7 @@ input {
 	outline: none;
 	border: none;
 	background: none;
-	color: var(--light-text);
+	color: var(--text-color);
 
 	&::placeholder {
 		color: var(--placeholder-color);

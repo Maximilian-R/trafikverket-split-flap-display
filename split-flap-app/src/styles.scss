@@ -7,8 +7,9 @@ body {
 	width: 100%;
 	margin: 0;
 	padding: 0;
+	font-size: 16px;
 
-	//background-color: #131313;
+	background-color: var(--bg-color);
 }
 
 table,
@@ -27,14 +28,18 @@ h1 {
 }
 
 :root {
-	--text: black;
-	--light-text: white;
-	--placeholder-color: #7e7e7e;
+	--bg-color: #202124;
+	--text-color: #e8eaed;
+
+	--input-bg-color: #303134;
+
+	--placeholder-color: #999da2;
 	--disabled-color: #494949;
 	--button-color: #fff;
 
+	--split-flap-text-color: white;
 	--split-flap-border-color: black;
-	--split-flap-background-color: #252525;
+	--split-flap-background-color: #242424;
 
 	--red: #fe0100;
 	--green: #01cc34;
