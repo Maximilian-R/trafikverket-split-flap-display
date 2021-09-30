@@ -4,7 +4,7 @@
 		<label>Avgående</label>
 		<span>&nbsp;</span>
 		<label class="EN">Departures</label>
-		<div class="loading-icon" [class.load]="isLoading$ | async"></div>
+		<div class="loading-icon" [class.load]="isLoading$ | async" (click)="refresh()"></div>
 	</caption>
 	<tr>
 		<th><label>Avgång</label><label class="EN">Departure</label></th>
