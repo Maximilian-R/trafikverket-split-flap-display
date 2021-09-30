@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { TrafikverketApiService } from '../api/trafikverket-api.service';
 import { TrainAnnouncement, TrainAnnouncements } from '../models/train-announcement.model';
 import { ISplitFlapData } from 'src/app/split-flap/split-flap.component';
-import { combineLatest, timer, Observable, Subject } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { combineLatest, timer, Observable, Subject, merge, of } from 'rxjs';
+import { switchMap, map, tap, startWith } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { ITheme } from 'src/app/core/theme-selector/theme-selector.component';
 import { LoadingService } from 'src/app/core/loading/loading.service';
@@ -22,6 +22,7 @@ export class SplitFlapDepartureComponent {
 		}
 	}
 	private trainStation$: Subject<ITrainStation> = new Subject();
+	private refresh$: Subject<void> = new Subject();
 
 	public announcements: TrainAnnouncements = [];
 	public data: ISplitFlapData;
@@ -34,10 +35,17 @@ export class SplitFlapDepartureComponent {
 		private loadingService: LoadingService
 	) {
 		this.isLoading$ = this.loadingService.isLoading();
-		const trigger$ = combineLatest(timer(0, 60000), this.trainStation$.pipe(map((trainStation) => trainStation.LocationSignature)));
+		const trigger$ = this.trainStation$.pipe(map((trainStation) => trainStation.LocationSignature));
 		trigger$
 			.pipe(
-				switchMap(([timer, signature]) => {
+				switchMap((signature) => {
+					return this.refresh$.pipe(
+						startWith(0),
+						switchMap(() => timer(0, 60000)),
+						map(() => signature)
+					);
+				}),
+				switchMap((signature) => {
 					return this.trafikverketApiService.getTrainAnnouncements([signature]);
 				})
 			)
@@ -85,5 +93,9 @@ export class SplitFlapDepartureComponent {
 	public setStation(station: ITrainStation) {
 		this.trainStation = station;
 		console.log(this.trainStation);
+	}
+
+	public refresh() {
+		this.refresh$.next();
 	}
 }
