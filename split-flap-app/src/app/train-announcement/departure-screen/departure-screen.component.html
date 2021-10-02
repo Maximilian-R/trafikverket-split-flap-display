@@ -7,7 +7,7 @@
 		<div class="departure-screen">
 			<div class="screen">
 				<div class="departure-info">
-					<span>{{ announcement?.advertisedDepartureTime || '00:00' | date: 'HH:mm' }}</span>
+					<span>{{ announcement?.advertisedDepartureTime | date: 'HH:mm' }}</span>
 					<span *ngFor="let service of announcement?.service">{{ service }}</span>
 					<span *ngFor="let product of announcement?.productInformation">{{ product }}</span>
 					<span>Tågnr {{ announcement?.trainNumber || '----' }}</span>
