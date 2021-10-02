@@ -2,27 +2,27 @@
 	<div>
 		<div class="departure-track">
 			<label>Spår</label>
-			<div>{{ announcement.track }}</div>
+			<div>{{ announcement?.track }}</div>
 		</div>
 		<div class="departure-screen">
 			<div class="screen">
 				<div class="departure-info">
-					<span>{{ announcement.advertisedDepartureTime | date: 'HH:mm' }}</span>
-					<span *ngFor="let service of announcement.service">{{ service }}</span>
-					<span *ngFor="let product of announcement.productInformation">{{ product }}</span>
-					<span>Tågnr {{ announcement.trainNumber }}</span>
+					<span>{{ announcement?.advertisedDepartureTime | date: 'HH:mm' }}</span>
+					<span *ngFor="let service of announcement?.service">{{ service }}</span>
+					<span *ngFor="let product of announcement?.productInformation">{{ product }}</span>
+					<span>Tågnr {{ announcement?.trainNumber }}</span>
 				</div>
 				<div class="destination">
-					<span *ngFor="let location of announcement.toLocation">{{ location }}</span>
+					<span *ngFor="let location of announcement?.toLocation">{{ location }}</span>
 				</div>
 			</div>
 			<div class="screen-divider"></div>
 			<div #screenRef class="screen">
 				<div #passbyRef class="passby" [class.scroll]="scrollPassby">
-					<span *ngFor="let location of announcement.viaLocation">{{ location }}</span>
+					<span *ngFor="let location of announcement?.viaLocation">{{ location }}</span>
 				</div>
 				<div #extraRef class="extra" [class.scroll]="scrollExtra">
-					<span *ngFor="let composition of announcement.trainComposition">{{ composition }}</span>
+					<span *ngFor="let composition of announcement?.trainComposition">{{ composition }}</span>
 				</div>
 			</div>
 		</div>
