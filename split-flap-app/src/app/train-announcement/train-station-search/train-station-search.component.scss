@@ -20,6 +20,6 @@ li {
 	padding: 0.5em;
 
 	&.selected {
-		background-color: rgb(250, 189, 132);
+		background-color: var(--selected-bg-color);
 	}
 }

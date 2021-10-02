@@ -18,7 +18,7 @@
 .spinner > div {
 	width: 16px;
 	height: 16px;
-	background-color: rgb(85, 255, 141);
+	background-color: var(--loading-indicator);
 
 	border-radius: 100%;
 	display: inline-block;

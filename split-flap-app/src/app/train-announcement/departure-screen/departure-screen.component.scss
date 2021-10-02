@@ -4,15 +4,15 @@
 	margin-right: auto;
 
 	box-shadow: 2px 2px 1px 1px #111;
-	background-color: #333;
-	color: #fff;
+	background-color: var(--split-flap-background-color);
+	color: var(--split-flap-text-color);
 	font-family: 'Roboto Mono', monospace;
 	padding: 1rem;
 	width: 30rem;
 	border-radius: 0.5rem;
 
 	> div {
-		background-color: #111;
+		background-color: var(--split-flap-border-color);
 		padding: 0.5rem;
 		display: flex;
 		flex-direction: row;
@@ -30,7 +30,7 @@
 		rgba(25, 119, 29, 1) 88%,
 		rgba(11, 68, 14, 1) 100%
 	);
-	color: #ffff6b;
+	color: var(--text-yellow);
 	overflow: hidden;
 	white-space: nowrap;
 	//text-shadow: 0px 0px 0.3rem #ffff6b;
@@ -40,7 +40,7 @@
 	}
 
 	.screen-divider {
-		background-color: #111;
+		background-color: var(--split-flap-border-color);
 		height: 1rem;
 	}
 
@@ -90,7 +90,7 @@
 	justify-content: center;
 	margin-right: 0.5rem;
 
-	text-shadow: 0px 0px 1rem white;
+	text-shadow: 0px 0px 1rem var(--split-flap-text-color);
 
 	> label {
 		font-weight: 600;

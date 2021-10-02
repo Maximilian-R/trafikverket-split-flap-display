@@ -46,12 +46,12 @@ th {
 }
 
 .EN {
-	color: hsl(60, 100%, 60%);
+	color: var(--announcement-yellow);
 }
 
 @keyframes flashing {
 	100% {
-		background-color: hsl(60, 100%, 60%);
-		box-shadow: 0 0 6px 2px hsl(60, 100%, 60%);
+		background-color: var(--announcement-yellow);
+		box-shadow: 0 0 6px 2px var(--announcement-yellow);
 	}
 }

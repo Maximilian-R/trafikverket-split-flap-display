@@ -28,21 +28,26 @@ h1 {
 }
 
 :root {
-	--bg-color: #202124;
-	--text-color: #e8eaed;
+	--bg-color: #cfcfcf;
+	--text-color: #000000;
 
 	--input-bg-color: #303134;
-
-	--placeholder-color: #999da2;
-	--disabled-color: #494949;
-	--button-color: #fff;
+	--placeholder-color: #ffffff;
+	--selected-bg-color: #ccd1df;
 
 	--split-flap-text-color: white;
 	--split-flap-border-color: black;
-	--split-flap-background-color: #242424;
+	--split-flap-background-color: #303134;
 
-	--red: #fe0100;
-	--green: #01cc34;
-	--soft-red: #fc4a4a;
-	--soft-green: #39d460;
+	--announcement-yellow: #ffff33;
+
+	--loading-indicator: var(--announcement-yellow);
+
+	--invalid: #fc4a4a;
+	--valid: #39d460;
+
+	@media (prefers-color-scheme: dark) {
+		--bg-color: #202124;
+		--text-color: #e8eaed;
+	}
 }

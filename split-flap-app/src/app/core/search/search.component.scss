@@ -25,7 +25,7 @@
 		}
 
 		&:hover:enabled {
-			color: var(--soft-red);
+			color: var(--invalid);
 		}
 	}
 
@@ -37,11 +37,11 @@
 		}
 
 		&.valid {
-			color: var(--soft-green);
+			color: var(--valid);
 		}
 
 		&.error {
-			color: var(--soft-red);
+			color: var(--invalid);
 		}
 	}
 }
@@ -58,7 +58,7 @@ input {
 	outline: none;
 	border: none;
 	background: none;
-	color: var(--text-color);
+	color: var(--placeholder-color);
 
 	&::placeholder {
 		color: var(--placeholder-color);
