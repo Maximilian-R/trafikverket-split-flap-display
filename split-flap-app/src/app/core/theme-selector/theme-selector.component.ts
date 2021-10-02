@@ -6,7 +6,7 @@ export interface ITheme {
 	name: string;
 }
 
-const THEMES: ITheme[] = [
+export const THEMES: ITheme[] = [
 	{
 		color: '#171717',
 		colorTint: '#2d2d2d',

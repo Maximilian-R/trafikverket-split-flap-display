@@ -5,7 +5,7 @@ import { ISplitFlapData } from 'src/app/split-flap/split-flap.component';
 import { combineLatest, timer, Observable, Subject, merge, of } from 'rxjs';
 import { switchMap, map, tap, startWith } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { ITheme } from 'src/app/core/theme-selector/theme-selector.component';
+import { ITheme, THEMES } from 'src/app/core/theme-selector/theme-selector.component';
 import { LoadingService } from 'src/app/core/loading/loading.service';
 import { ITrainStation } from '../interfaces/train-station.interface';
 
@@ -26,7 +26,7 @@ export class SplitFlapDepartureComponent {
 
 	public announcements: TrainAnnouncements = [];
 	public data: ISplitFlapData;
-	public theme: ITheme;
+	public theme: ITheme = THEMES[4];
 	public isLoading$: Observable<boolean>;
 
 	constructor(
