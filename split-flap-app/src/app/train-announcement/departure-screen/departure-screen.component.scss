@@ -3,13 +3,13 @@
 	margin: 2em;
 	margin-left: auto;
 	margin-right: auto;
+	user-select: none;
 
 	box-shadow: 12px 12px 4px 2px rgb(0 0 0 / 25%);
 	background-color: var(--departure-sign-border-color);
 	color: var(--departure-sign-text-color);
 	font-family: 'Roboto Mono', monospace;
 	padding: 1em;
-	//width: 30rem;
 	border-radius: 0.2em;
 
 	> div {
