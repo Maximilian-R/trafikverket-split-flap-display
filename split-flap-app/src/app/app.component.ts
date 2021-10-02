@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ITrainStation } from './train-announcement/interfaces/train-station.interface';
 
 @Component({
 	selector: 'app-root',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'split-flap-app';
+
+	trainStation: ITrainStation;
 
 	constructor() {}
 }

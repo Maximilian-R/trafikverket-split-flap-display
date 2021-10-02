@@ -31,7 +31,7 @@ h1 {
 	--bg-color: #cfcfcf;
 	--text-color: #000000;
 
-	--input-bg-color: #303134;
+	--input-bg-color: rgb(255, 255, 255, 0.5);
 	--placeholder-color: #ffffff;
 	--selected-bg-color: #ccd1df;
 
@@ -43,8 +43,8 @@ h1 {
 
 	--loading-indicator: var(--announcement-yellow);
 
-	--invalid: #fc4a4a;
-	--valid: #39d460;
+	--invalid: #ff3399;
+	--valid: #33ff99;
 
 	@media (prefers-color-scheme: dark) {
 		--bg-color: #202124;

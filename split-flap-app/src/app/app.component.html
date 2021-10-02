@@ -1,4 +1,7 @@
 <app-loading></app-loading>
 <router-outlet></router-outlet>
-<app-header><h1>Train Announcement Screens</h1></app-header>
-<app-split-flap-departure></app-split-flap-departure>
+<app-header
+	><h1>Train Announcement Screens</h1>
+	<app-train-station-search (selectedTrainStation)="trainStation = $event"></app-train-station-search
+></app-header>
+<app-split-flap-departure [trainStation]="trainStation"></app-split-flap-departure>
