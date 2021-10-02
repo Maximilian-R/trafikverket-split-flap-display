@@ -1,83 +1,75 @@
 .departure-sign {
+	font-size: 1rem;
 	margin: 2rem;
 	margin-left: auto;
 	margin-right: auto;
 
-	box-shadow: 2px 2px 1px 1px #111;
-	background-color: var(--split-flap-background-color);
-	color: var(--split-flap-text-color);
+	//box-shadow: 2px 2px 1px 1px #111;
+	background-color: var(--departure-sign-border-color);
+	color: var(--departure-sign-text-color);
 	font-family: 'Roboto Mono', monospace;
-	padding: 1rem;
-	width: 30rem;
-	border-radius: 0.5rem;
+	padding: 1em;
+	//width: 30rem;
+	border-radius: 0.2em;
 
 	> div {
-		background-color: var(--split-flap-border-color);
-		padding: 0.5rem;
+		background-color: var(--departure-sign-bg-color);
+		box-shadow: inset 0 0 2px 1px #000;
 		display: flex;
 		flex-direction: row;
-		border-radius: 0.1rem;
+		border-radius: 0.2em;
 	}
 }
 
 .departure-screen {
+	margin: 0.5em;
+	margin-left: 0;
+	margin-right: 0;
 	flex-grow: 1;
-	background: linear-gradient(
-		145deg,
-		rgba(19, 94, 22, 1) 0%,
-		rgba(24, 115, 27, 1) 12%,
-		rgba(24, 91, 26, 1) 27%,
-		rgba(25, 119, 29, 1) 88%,
-		rgba(11, 68, 14, 1) 100%
-	);
-	color: var(--text-yellow);
+	color: var(--announcement-yellow);
 	overflow: hidden;
 	white-space: nowrap;
-	//text-shadow: 0px 0px 0.3rem #ffff6b;
+	//text-shadow: 0px 0px 0.3em var(--announcement-yellow);
 
 	.screen {
-		padding: 0 0.2rem;
+		padding: 0.2em;
+		box-shadow: inset 0 0 2px 1px #000;
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+		background: linear-gradient(
+			145deg,
+			rgba(19, 94, 22, 1) 0%,
+			rgba(24, 115, 27, 1) 12%,
+			rgba(24, 91, 26, 1) 27%,
+			rgba(25, 119, 29, 1) 88%,
+			rgba(11, 68, 14, 1) 100%
+		);
 	}
 
 	.screen-divider {
-		background-color: var(--split-flap-border-color);
-		height: 1rem;
+		background-color: var(--departure-sign-bg-color);
+		border-bottom: 0.0625em solid black;
+		margin-bottom: 0.5em;
+		margin-top: 0.5em;
 	}
 
 	.departure-info {
 		display: flex;
 		justify-content: space-between;
-		font-size: 1rem;
-		height: 1.5rem;
-		//line-height: 1.5rem;
-		gap: 1rem;
+		font-size: 1.2em;
+		gap: 1em;
 	}
 
 	.destination {
-		height: 3rem;
-		//line-height: 3rem;
-		font-size: 2rem;
+		font-size: 2em;
 	}
 
-	.passby {
-		display: inline-block;
-		font-size: 1rem;
-		height: 1.5rem;
-		//line-height: 1.25rem;
-		gap: 1rem;
-		:not(:last-child) {
-			margin-right: 0.5rem;
-		}
-	}
-
+	.passby,
 	.extra {
-		display: inline-block;
-		gap: 1rem;
-		font-size: 1rem;
-		height: 1.5rem;
-		//line-height: 1.25rem;
+		font-size: 1em;
 		display: flex;
 		justify-content: space-between;
+		gap: 1rem;
 	}
 }
 
@@ -85,20 +77,19 @@
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	flex-grow: 0;
-	flex-shrink: 0;
 	justify-content: center;
-	margin-right: 0.5rem;
 
-	text-shadow: 0px 0px 1rem var(--split-flap-text-color);
+	border-right: 0.0625em solid black;
+	padding: 0.5em;
+	//text-shadow: 0px 0px 1em var(--split-flap-text-color);
 
 	> label {
 		font-weight: 600;
-		font-size: 1rem;
+		font-size: 1em;
 	}
 
 	> div {
-		font-size: 3rem;
+		font-size: 3em;
 	}
 }
 

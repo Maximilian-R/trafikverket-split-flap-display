@@ -36,7 +36,7 @@ h1 {
 	--selected-bg-color: #ccd1df;
 
 	--split-flap-text-color: white;
-	--split-flap-border-color: black;
+	--split-flap-border-color: #222222;
 	--split-flap-background-color: #303134;
 
 	--announcement-yellow: #ffff33;
@@ -45,6 +45,10 @@ h1 {
 
 	--invalid: #ff3399;
 	--valid: #33ff99;
+
+	--departure-sign-bg-color: var(--split-flap-border-color);
+	--departure-sign-text-color: var(--split-flap-text-color);
+	--departure-sign-border-color: var(--split-flap-background-color);
 
 	@media (prefers-color-scheme: dark) {
 		--bg-color: #202124;
