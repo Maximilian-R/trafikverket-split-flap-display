@@ -50,6 +50,7 @@ export class SplitFlapDepartureComponent {
 				})
 			)
 			.subscribe((announcements) => {
+				this.announcements = announcements;
 				this.data = this.createSplitFlapData(announcements);
 			});
 	}
@@ -92,7 +93,6 @@ export class SplitFlapDepartureComponent {
 
 	public setStation(station: ITrainStation) {
 		this.trainStation = station;
-		console.log(this.trainStation);
 	}
 
 	public refresh() {
