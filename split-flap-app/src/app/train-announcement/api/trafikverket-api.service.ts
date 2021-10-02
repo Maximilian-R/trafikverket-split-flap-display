@@ -43,7 +43,7 @@ export class TrafikverketApiService {
 		if (!search) {
 			return of([]);
 		}
-		const query = TRAIN_STATION_SEARCH_QUERY(search, 4);
+		const query = TRAIN_STATION_SEARCH_QUERY(search, 10);
 		return this.post(query).pipe(map((response) => response.RESPONSE.RESULT[0].TrainStation));
 	}
 
