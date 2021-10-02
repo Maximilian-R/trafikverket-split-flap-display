@@ -1,10 +1,10 @@
 .departure-sign {
 	font-size: 1rem;
-	margin: 2rem;
+	margin: 2em;
 	margin-left: auto;
 	margin-right: auto;
 
-	//box-shadow: 2px 2px 1px 1px #111;
+	box-shadow: 12px 12px 4px 2px rgb(0 0 0 / 25%);
 	background-color: var(--departure-sign-border-color);
 	color: var(--departure-sign-text-color);
 	font-family: 'Roboto Mono', monospace;
@@ -44,6 +44,10 @@
 			rgba(25, 119, 29, 1) 88%,
 			rgba(11, 68, 14, 1) 100%
 		);
+
+		> * {
+			overflow: hidden;
+		}
 	}
 
 	.screen-divider {
@@ -106,4 +110,13 @@
 	100% {
 		transform: translateX(-100%);
 	}
+}
+
+.departure-info,
+.destination,
+.passby,
+.extra,
+.departure-track > div {
+	line-height: 1em;
+	height: 1.1em;
 }

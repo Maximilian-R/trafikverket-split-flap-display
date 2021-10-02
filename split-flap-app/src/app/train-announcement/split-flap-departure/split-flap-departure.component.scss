@@ -50,3 +50,22 @@ th {
 		box-shadow: 0 0 6px 2px var(--announcement-yellow);
 	}
 }
+
+.grid {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 2rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 2rem;
+
+	app-departure-screen {
+		width: 100%;
+		min-width: 0;
+	}
+
+	@media screen and (max-width: 800px) {
+		grid-template-columns: 1fr;
+	}
+}

@@ -2,15 +2,15 @@
 	<div>
 		<div class="departure-track">
 			<label>Spår</label>
-			<div>{{ announcement?.track }}</div>
+			<div>{{ announcement?.track || 0 }}</div>
 		</div>
 		<div class="departure-screen">
 			<div class="screen">
 				<div class="departure-info">
-					<span>{{ announcement?.advertisedDepartureTime | date: 'HH:mm' }}</span>
+					<span>{{ announcement?.advertisedDepartureTime || '00:00' | date: 'HH:mm' }}</span>
 					<span *ngFor="let service of announcement?.service">{{ service }}</span>
 					<span *ngFor="let product of announcement?.productInformation">{{ product }}</span>
-					<span>Tågnr {{ announcement?.trainNumber }}</span>
+					<span>Tågnr {{ announcement?.trainNumber || '----' }}</span>
 				</div>
 				<div class="destination">
 					<span *ngFor="let location of announcement?.toLocation">{{ location }}</span>
