@@ -61,7 +61,6 @@ export class TrainStationSearchComponent {
 	}
 
 	public input(value: string) {
-		console.log('input', value);
 		this.valid = undefined;
 		this.selected = undefined;
 		this.lastTyped = value;
@@ -70,7 +69,6 @@ export class TrainStationSearchComponent {
 	}
 
 	public preselect(index: number | undefined): void {
-		console.log('preselect', index);
 		this.selected = index;
 		if (this.selected !== undefined) {
 			this.search = this.hits[this.selected]?.AdvertisedLocationName;
@@ -80,7 +78,6 @@ export class TrainStationSearchComponent {
 	}
 
 	public select(): void {
-		console.log('select');
 		if (this.hits.length > 0 && this.selected === undefined) {
 			// select first
 			this.preselect(0);
@@ -88,7 +85,6 @@ export class TrainStationSearchComponent {
 
 		if (this.selected === undefined) {
 			// nothing found, error?
-			console.log('No selected', this.search);
 			this.valid = this.search.length === 0 ? undefined : !this.search;
 			return;
 		}
@@ -97,7 +93,6 @@ export class TrainStationSearchComponent {
 		const toSelect = this.hits[this.selected];
 
 		if (this.lastSelected?.LocationSignature === toSelect?.LocationSignature) {
-			console.log('abort select, same object');
 		} else {
 			this.lastSelected = toSelect;
 			this.selectedTrainStation.emit(toSelect);
@@ -109,17 +104,14 @@ export class TrainStationSearchComponent {
 	}
 
 	public close(): void {
-		console.log('close');
 		this.dropdownOpen = false;
 	}
 
 	public focusin(): void {
-		console.log('focusin');
 		this.dropdownOpen = true;
 	}
 
 	public clear(): void {
-		console.log('clear');
 		this.valid = undefined;
 		this.search = '';
 		this.selected = undefined;
@@ -128,7 +120,6 @@ export class TrainStationSearchComponent {
 	}
 
 	public clickOutside(event: any): void {
-		console.log('click outside', event);
 		if (this.dropdownOpen) {
 			this.select();
 		}
