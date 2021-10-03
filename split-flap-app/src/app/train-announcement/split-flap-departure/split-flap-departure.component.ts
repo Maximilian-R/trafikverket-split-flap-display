@@ -63,7 +63,7 @@ export class SplitFlapDepartureComponent {
 			const to = announcement.toLocation[0].toUpperCase();
 			const track = announcement.track.toUpperCase();
 			const train = announcement.trainNumber.toUpperCase();
-			const operator = announcement.productInformation[0].toUpperCase();
+			const operator = (announcement.productInformation[0] || '').toUpperCase();
 			const remark = announcement.hasDeparted
 				? 'HAR AVGÅTT'
 				: announcement.hasNewDepartureTime
