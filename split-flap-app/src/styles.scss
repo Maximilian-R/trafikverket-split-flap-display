@@ -46,6 +46,7 @@ h1 {
 
 	--invalid: #ff3399;
 	--valid: #33ff99;
+	--warning: #ffff33;
 
 	--departure-sign-bg-color: var(--split-flap-border-color);
 	--departure-sign-text-color: var(--split-flap-text-color);
@@ -71,4 +72,20 @@ footer {
 	width: 100%;
 	height: 20rem;
 	background-position: 50% 100%;
+}
+
+fa-icon {
+	color: var(--placeholder-color);
+
+	.fa-check-circle {
+		color: var(--valid);
+	}
+
+	.fa-times-circle {
+		color: var(--invalid);
+	}
+
+	.fa-exclamation-circle {
+		color: var(--warning);
+	}
 }

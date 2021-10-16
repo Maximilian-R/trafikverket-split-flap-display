@@ -1,22 +1,32 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { faTimesCircle, faCheckCircle, faCircle, faSearch, faTimes, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import {
+	IconDefinition,
+	faTimesCircle,
+	faExclamationCircle,
+	faCheckCircle,
+	faSpinner,
+	faBackspace,
+} from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
 	selector: 'app-search',
 	templateUrl: './search.component.html',
 	styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnChanges {
 	faTimesCircle = faTimesCircle;
 	faCheckCircle = faCheckCircle;
 	faCircle = faCircle;
-	faSearch = faSearch;
-	faTimes = faTimes;
-	faSpinner = faSpinner;
+	faBackSpace = faBackspace;
+
+	rightIcon: IconDefinition;
 
 	@Input() value: string;
 
 	@Input() loading: boolean;
+
+	@Input() error: boolean;
 
 	@Input() placeholder: string = '';
 
@@ -29,6 +39,10 @@ export class SearchComponent {
 	@ViewChild('input') inputRef: ElementRef;
 
 	constructor() {}
+
+	ngOnChanges() {
+		this.rightIcon = this.loading ? faSpinner : this.error ? faExclamationCircle : this.value ? faBackspace : undefined;
+	}
 
 	public clear(): void {
 		this.cleared.emit();

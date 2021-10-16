@@ -10,6 +10,11 @@
 	display: flex;
 	align-items: center;
 
+	&-button {
+		width: 2rem;
+		flex: 0 0 2rem;
+	}
+
 	button {
 		display: flex;
 		font-size: 1em;
@@ -19,6 +24,7 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+		margin: 0;
 
 		&:disabled {
 			cursor: inherit;
@@ -31,18 +37,6 @@
 
 	fa-icon {
 		font-size: 0.7em;
-
-		&.undefined {
-			color: var(--placeholder-color);
-		}
-
-		&.valid {
-			color: var(--valid);
-		}
-
-		&.error {
-			color: var(--invalid);
-		}
 	}
 }
 

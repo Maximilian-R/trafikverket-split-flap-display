@@ -1,10 +1,11 @@
 <div class="search" (keyup.Enter)="submit()">
-	<fa-icon *ngIf="valid === undefined" [icon]="faCircle" class="undefined"></fa-icon>
-	<fa-icon *ngIf="valid === true" [icon]="faCheckCircle" class="valid"></fa-icon>
-	<fa-icon *ngIf="valid === false" [icon]="faTimesCircle" class="error"></fa-icon>
+	<fa-icon *ngIf="valid === undefined" [icon]="faCircle"></fa-icon>
+	<fa-icon *ngIf="valid === true" [icon]="faCheckCircle"></fa-icon>
+	<fa-icon *ngIf="valid === false" [icon]="faTimesCircle"></fa-icon>
 	<input #input [(ngModel)]="value" [placeholder]="placeholder" />
-	<button [disabled]="!value" (click)="clear()">
-		<fa-icon [icon]="loading ? faSpinner : value ? faTimesCircle : faSearch" [class.fa-pulse]="loading"></fa-icon>
-	</button>
-	<!-- <button (click)="submit()"><fa-icon [icon]="faSearch"></fa-icon></button> -->
+	<div class="search-button">
+		<button [disabled]="rightIcon != faBackSpace" (click)="clear()" *ngIf="rightIcon">
+			<fa-icon [icon]="rightIcon" [class.fa-spin]="loading"></fa-icon>
+		</button>
+	</div>
 </div>

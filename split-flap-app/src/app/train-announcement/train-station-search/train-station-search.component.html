@@ -13,9 +13,10 @@
 		[value]="search"
 		(cleared)="clear()"
 		(submitted)="select()"
-		[placeholder]="'Station'"
+		[placeholder]="'Sök station'"
 		[valid]="valid"
 		[loading]="isSearching"
+		[error]="isError"
 		(input)="input($event.target.value)"
 		(keyup.Esc)="close()"
 	></app-search>

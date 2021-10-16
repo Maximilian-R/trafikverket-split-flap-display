@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { TrafikverketApiService } from '../api/trafikverket-api.service';
 import { Subject, of, merge } from 'rxjs';
-import { switchMap, map, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { switchMap, map, debounceTime, distinctUntilChanged, tap, catchError } from 'rxjs/operators';
 import { ITrainStation, ITrainStations } from '../interfaces/train-station.interface';
 
 @Component({
@@ -29,6 +29,8 @@ export class TrainStationSearchComponent {
 
 	isSearching: boolean = false;
 
+	isError: boolean = false;
+
 	@Output() selectedTrainStation: EventEmitter<ITrainStation> = new EventEmitter();
 
 	// TODO: Test when there is a slow response from api service
@@ -39,12 +41,15 @@ export class TrainStationSearchComponent {
 				tap(() => (this.isSearching = true)),
 				debounceTime(300),
 				switchMap((search) => {
-					if (search) {
-						this.isSearching = true;
-						return this.trafikverketApiService.searchTrainStations(search).pipe(tap(() => (this.isSearching = false)));
-					} else {
-						return of<ITrainStations>([]);
-					}
+					return this.trafikverketApiService.searchTrainStations(search);
+				}),
+				tap(() => {
+					this.isSearching = false;
+					this.isError = false;
+				}),
+				catchError(() => {
+					this.isError = true;
+					return of([]);
 				})
 			),
 			this.selected$.pipe(
