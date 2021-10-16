@@ -1,12 +1,14 @@
-export const TEMPLATE_NO_DEPARTURE = [
-	[...'     INGA AVGÅNGAR                            '.split('')],
-	[...'     NO DEPARTURES                            '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'                                              '.split('')],
-	[...'     POWERED    WITH DATA   FROM TRAFIKVERKET '.split('')],
-];
+import { splitRows } from 'src/app/split-flap/templates/utilites';
+
+export const TEMPLATE_NO_DEPARTURE = splitRows([
+	'     INGA AVGÅNGAR                            ',
+	'     NO DEPARTURES                            ',
+	'                                              ',
+	'                                              ',
+	'                                              ',
+	'                                              ',
+	'                                              ',
+	'                                              ',
+	'                                              ',
+	'     POWERED    WITH DATA   FROM TRAFIKVERKET ',
+]);

@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { ISplitFlapData } from '../split-flap.component';
+import { ISplitFlapInput } from '../flaps/flap.interface';
 import { ISplitFlapTestCase, SplitFlapFlightTest, SplitFlapAnimationTest } from './split-flap-test-cases';
 
 @Component({
@@ -8,7 +8,7 @@ import { ISplitFlapTestCase, SplitFlapFlightTest, SplitFlapAnimationTest } from 
 	styleUrls: ['./split-flap-example.component.scss'],
 })
 export class SplitFlapExampleComponent implements OnInit {
-	public data: ISplitFlapData;
+	public data: ISplitFlapInput;
 	public testCase: ISplitFlapTestCase = new SplitFlapAnimationTest();
 
 	constructor() {}
@@ -20,7 +20,7 @@ export class SplitFlapExampleComponent implements OnInit {
 		} else {
 			this.data = this.testCase.initial();
 			if (this.testCase instanceof SplitFlapAnimationTest) {
-				this.testCase.animate((data: ISplitFlapData) => {
+				this.testCase.animate((data: ISplitFlapInput) => {
 					this.data = data;
 				}, 60);
 			}

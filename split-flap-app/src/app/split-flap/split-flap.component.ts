@@ -1,17 +1,9 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { characters, characterIds, validate } from './characters';
+import { Flap } from './flaps/flaps';
 import { SplitFlapAudioService } from './split-flap-audio.service';
 import { ITheme } from '../core/theme-selector/theme-selector.component';
-
-interface ILetter {
-	character: string;
-	next: string;
-	current: string;
-	color?: string;
-}
-
-export type ISplitFlapData = string[][];
-type ISplitFlapTable = ILetter[][];
+import { IFlap, ISplitFlapGrid, ISplitFlapInput } from './flaps/flap.interface';
+import { TEMPLATE_EMPTY_GRID } from './templates/empty-grid.template';
 
 @Component({
 	selector: 'app-split-flap',
@@ -19,18 +11,17 @@ type ISplitFlapTable = ILetter[][];
 	styleUrls: ['./split-flap.component.scss'],
 })
 export class SplitFlapComponent implements OnInit, OnChanges {
-	@Input() data: ISplitFlapData;
+	@Input() data: ISplitFlapInput;
 	@Input() rows: number;
 	@Input() columns: number;
 	@Input() dividers: number[] = [undefined];
 	@Input() hoverTheme: ITheme;
 
-	public flaps = characters;
+	public flapFaces = Flap.FLAP_FACES;
 
-	// Holds the full table of letters.
-	public table: ISplitFlapTable;
-	// Holds the letters that should should flip.
-	private letters: ILetter[];
+	public grid: ISplitFlapGrid;
+
+	private flaps: IFlap[];
 
 	private instantiatedData: boolean = false;
 	private isRunning: boolean = false;
@@ -46,18 +37,18 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 		// Setup temporary flippers while waiting for data
 		if (changes.data && !changes.data.currentValue) {
 			this.instantiatedData = false;
-			const grid = Array.from(Array(this.rows), (row) => Array.from(Array(this.columns), (col) => ' '));
-			this.table = this.createTable(grid);
+			const grid = TEMPLATE_EMPTY_GRID(this.rows, this.columns);
+			this.grid = this.createGrid(grid);
 		}
 
 		if (changes.data && JSON.stringify(changes.data.previousValue) !== JSON.stringify(changes.data.currentValue)) {
 			if (this.instantiatedData) {
-				this.updateTable(this.data);
+				this.updateGrid(this.data);
 			} else {
-				this.table = this.createTable(this.data);
+				this.grid = this.createGrid(this.data);
 				this.instantiatedData = true;
 			}
-			this.updateLetters(this.table);
+			this.updateFlaps(this.grid);
 
 			if (!this.isRunning) {
 				this.run();
@@ -76,53 +67,44 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 		this.SplitFlapAudioService.stop();
 	}
 
-	private updateTable(data: ISplitFlapData): void {
-		this.table.forEach((row, x) =>
+	private updateGrid(data: ISplitFlapInput): void {
+		this.grid.forEach((row, x) =>
 			row.forEach((col, y) => {
-				col.character = validate(data[x][y]);
+				col.target = Flap.validate(data[x][y]);
 			})
 		);
 	}
 
-	private updateLetters(data: ISplitFlapTable) {
-		this.letters = data
+	private updateFlaps(data: ISplitFlapGrid) {
+		this.flaps = data
 			.flatMap((col) => col)
-			.filter((letter) => {
-				return letter.character !== letter.current;
+			.filter((flap) => {
+				return flap.target !== flap.current;
 			});
 	}
 
-	private createTable(data: ISplitFlapData): ISplitFlapTable {
-		return data.map((row) => row.map((col) => this.createLetter(col)));
-	}
-
-	private createLetter(character: string, color?: string): ILetter {
-		return {
-			character: validate(character),
-			next: characterIds[0],
-			current: characterIds[0],
-			color: color,
-		};
+	private createGrid(data: ISplitFlapInput): ISplitFlapGrid {
+		return data.map((row) => row.map((col) => Flap.create(col)));
 	}
 
 	private flipper() {
-		this.letters = this.letters.filter((letter) => {
-			return letter.character !== letter.current;
+		this.flaps = this.flaps.filter((flap) => {
+			return flap.target !== flap.current;
 		});
 
-		if (this.letters.length === 0) {
+		if (this.flaps.length === 0) {
 			this.stop();
 		} else {
 			this.timeout1 = setTimeout(() => {
 				this.timeout1 = undefined;
-				this.letters.forEach((letter) => {
-					letter.next = characterIds[characterIds.indexOf(letter.current) + 1] || ' ';
+				this.flaps.forEach((flap) => {
+					flap.next = Flap.next(flap.current);
 				});
 			}, this.flipTime);
 			this.timeout2 = setTimeout(() => {
 				this.timeout2 = undefined;
-				this.letters.forEach((letter) => {
-					letter.current = letter.next;
+				this.flaps.forEach((flap) => {
+					flap.current = flap.next;
 				});
 				this.flipper();
 			}, this.flipTime * 2);

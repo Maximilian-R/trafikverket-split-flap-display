@@ -2,15 +2,15 @@
 	<div class="inner">
 		<table [style.--row-hover-color-tint]="hoverTheme?.colorTint" [style.--row-hover-color]="hoverTheme?.color">
 			<ng-content></ng-content>
-			<tr *ngFor="let row of table; index as i; trackBy: trackByMethod">
+			<tr *ngFor="let row of grid; index as i; trackBy: trackByMethod">
 				<td *ngFor="let divider of dividers; index as j; trackBy: trackByMethod">
 					<div class="row">
 						<div *ngFor="let flap of row.slice(dividers[j - 1] || 0, divider || columns)" class="letter">
-							<div [ngClass]="flaps[flap.current].color">
-								<div>{{ flaps[flap.current].content }}</div>
+							<div [ngClass]="flapFaces[flap.current].color">
+								<div>{{ flapFaces[flap.current].content }}</div>
 							</div>
-							<div [ngClass]="flaps[flap.next].color">
-								<div>{{ flaps[flap.next].content }}</div>
+							<div [ngClass]="flapFaces[flap.next].color">
+								<div>{{ flapFaces[flap.next].content }}</div>
 							</div>
 						</div>
 					</div>
