@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 
 @Injectable({
 	providedIn: 'root',
@@ -10,7 +10,7 @@ export class SplitFlapAudioService {
 
 	constructor() {
 		const flipStart = new Howl({
-			src: ['../../assets/sounds/Splitflap-start.mp3'],
+			src: ['assets/sounds/Splitflap-start.mp3'],
 			loop: false,
 			preload: true,
 			onend: () => {
@@ -21,13 +21,13 @@ export class SplitFlapAudioService {
 		});
 
 		const flipLoop = new Howl({
-			src: ['../../assets/sounds/Splitflap-loop.mp3'],
+			src: ['assets/sounds/Splitflap-loop.mp3'],
 			loop: true,
 			preload: true,
 		});
 
 		const flipEnd = new Howl({
-			src: ['../../assets/sounds/Splitflap-end.mp3'],
+			src: ['assets/sounds/Splitflap-end.mp3'],
 			loop: false,
 			preload: true,
 		});
