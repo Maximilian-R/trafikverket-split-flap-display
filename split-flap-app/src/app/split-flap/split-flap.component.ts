@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Flap } from './flaps/flaps';
+import { Flap, Grid } from './flaps/flaps';
 import { SplitFlapAudioService } from './split-flap-audio.service';
 import { ITheme } from '../core/theme-selector/theme-selector.component';
 import { IFlap, ISplitFlapGrid, ISplitFlapInput } from './flaps/flap.interface';
@@ -17,7 +17,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 	@Input() dividers: number[] = [undefined];
 	@Input() hoverTheme: ITheme;
 
-	public flapFaces = Flap.FLAP_FACES;
+	public flapFaces = Flap.FACES;
 
 	public grid: ISplitFlapGrid;
 
@@ -34,21 +34,20 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 	ngOnInit(): void {}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		// Setup temporary flippers while waiting for data
 		if (changes.data && !changes.data.currentValue) {
 			this.instantiatedData = false;
-			const grid = TEMPLATE_EMPTY_GRID(this.rows, this.columns);
-			this.grid = this.createGrid(grid);
+			const template = TEMPLATE_EMPTY_GRID(this.rows, this.columns);
+			this.grid = Grid.create(template);
 		}
 
 		if (changes.data && JSON.stringify(changes.data.previousValue) !== JSON.stringify(changes.data.currentValue)) {
 			if (this.instantiatedData) {
-				this.updateGrid(this.data);
+				Grid.update(this.grid, this.data);
 			} else {
-				this.grid = this.createGrid(this.data);
+				this.grid = Grid.create(this.data);
 				this.instantiatedData = true;
 			}
-			this.updateFlaps(this.grid);
+			this.flaps = Grid.flip(this.grid);
 
 			if (!this.isRunning) {
 				this.run();
@@ -65,26 +64,6 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 	private stop(): void {
 		this.isRunning = false;
 		this.SplitFlapAudioService.stop();
-	}
-
-	private updateGrid(data: ISplitFlapInput): void {
-		this.grid.forEach((row, x) =>
-			row.forEach((col, y) => {
-				col.target = Flap.validate(data[x][y]);
-			})
-		);
-	}
-
-	private updateFlaps(data: ISplitFlapGrid) {
-		this.flaps = data
-			.flatMap((col) => col)
-			.filter((flap) => {
-				return flap.target !== flap.current;
-			});
-	}
-
-	private createGrid(data: ISplitFlapInput): ISplitFlapGrid {
-		return data.map((row) => row.map((col) => Flap.create(col)));
 	}
 
 	private flipper() {

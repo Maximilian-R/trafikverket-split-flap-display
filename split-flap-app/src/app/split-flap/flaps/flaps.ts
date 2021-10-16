@@ -1,7 +1,7 @@
-import { IFlap, IFlapFace } from './flap.interface';
+import { IFlap, IFlapFace, ISplitFlapGrid, ISplitFlapInput } from './flap.interface';
 
 export class Flap {
-	static FLAP_IDS: string[] = [
+	static IDS: string[] = [
 		' ',
 		'A',
 		'B',
@@ -74,8 +74,8 @@ export class Flap {
 		'b',
 		'y',
 	];
-	static FIRST_FLAP = Flap.FLAP_IDS[0];
-	static FLAP_FACES: { [key: string]: IFlapFace } = {
+	static FIRST = Flap.IDS[0];
+	static FACES: { [key: string]: IFlapFace } = {
 		A: { content: 'A' },
 		B: { content: 'B' },
 		C: { content: 'C' },
@@ -154,17 +154,39 @@ export class Flap {
 	static create(face: string, color?: string): IFlap {
 		return {
 			target: Flap.validate(face),
-			next: Flap.FIRST_FLAP,
-			current: Flap.FIRST_FLAP,
+			next: Flap.FIRST,
+			current: Flap.FIRST,
 			color: color,
 		};
 	}
 
 	static next(id: string): string {
-		return Flap.FLAP_IDS[Flap.FLAP_IDS.indexOf(id) + 1] || Flap.FIRST_FLAP;
+		return Flap.IDS[Flap.IDS.indexOf(id) + 1] || Flap.FIRST;
 	}
 
 	static validate(id: string): string {
-		return !!Flap.FLAP_FACES[id] ? id : Flap.FIRST_FLAP;
+		return !!Flap.FACES[id] ? id : Flap.FIRST;
+	}
+}
+
+export class Grid {
+	static create(data: ISplitFlapInput): ISplitFlapGrid {
+		return data.map((row) => row.map((col) => Flap.create(col)));
+	}
+
+	static update(grid: ISplitFlapGrid, data: ISplitFlapInput): void {
+		grid.forEach((row, x) =>
+			row.forEach((col, y) => {
+				col.target = Flap.validate(data[x][y]);
+			})
+		);
+	}
+
+	static flip(data: ISplitFlapGrid): IFlap[] {
+		return data
+			.flatMap((col) => col)
+			.filter((flap) => {
+				return flap.target !== flap.current;
+			});
 	}
 }
