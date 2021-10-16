@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { characters, characterIds } from './characters';
+import { characters, characterIds, validate } from './characters';
 import { SplitFlapAudioService } from './split-flap-audio.service';
 import { ITheme } from '../core/theme-selector/theme-selector.component';
 
@@ -79,7 +79,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 	private updateTable(data: ISplitFlapData): void {
 		this.table.forEach((row, x) =>
 			row.forEach((col, y) => {
-				col.character = data[x][y];
+				col.character = validate(data[x][y]);
 			})
 		);
 	}
@@ -98,7 +98,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 
 	private createLetter(character: string, color?: string): ILetter {
 		return {
-			character: character,
+			character: validate(character),
 			next: characterIds[0],
 			current: characterIds[0],
 			color: color,

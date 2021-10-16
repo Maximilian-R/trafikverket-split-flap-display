@@ -152,3 +152,5 @@ export const characters: { [key: string]: Flap } = {
 	b: { content: ' ', color: 'blue' },
 	y: { content: ' ', color: 'yellow' },
 };
+
+export const validate = (id: string) => (!!characters[id] ? id : ' ');
