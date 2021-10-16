@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 import { Howl } from 'howler';
 
 @Injectable({
@@ -8,9 +9,9 @@ export class SplitFlapAudioService {
 	private sounds: Howl[];
 	private isRunning: boolean = false;
 
-	constructor() {
+	constructor(@Inject(APP_BASE_HREF) public baseHref: string) {
 		const flipStart = new Howl({
-			src: ['assets/sounds/Splitflap-start.mp3'],
+			src: [baseHref + './assets/sounds/Splitflap-start.mp3'],
 			loop: false,
 			preload: true,
 			onend: () => {
@@ -21,13 +22,13 @@ export class SplitFlapAudioService {
 		});
 
 		const flipLoop = new Howl({
-			src: ['assets/sounds/Splitflap-loop.mp3'],
+			src: [baseHref + './assets/sounds/Splitflap-loop.mp3'],
 			loop: true,
 			preload: true,
 		});
 
 		const flipEnd = new Howl({
-			src: ['assets/sounds/Splitflap-end.mp3'],
+			src: [baseHref + './assets/sounds/Splitflap-end.mp3'],
 			loop: false,
 			preload: true,
 		});

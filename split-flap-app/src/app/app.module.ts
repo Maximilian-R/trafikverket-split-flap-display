@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule, PlatformLocation } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,11 @@ import { environment } from 'src/environments/environment';
 	providers: [
 		{ provide: USE_EMULATOR, useValue: environment.production ? undefined : ['localhost', 5001] },
 		{ provide: REGION, useValue: 'europe-west1' },
+		{
+			provide: APP_BASE_HREF,
+			useFactory: (platformLocation: PlatformLocation) => platformLocation.getBaseHrefFromDOM(),
+			deps: [PlatformLocation],
+		},
 	],
 	bootstrap: [AppComponent],
 })
