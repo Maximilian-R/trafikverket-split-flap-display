@@ -17,7 +17,7 @@ export const trafikverket = functions
     maxInstances: 1,
   })
   .region('europe-west1')
-  .https.onCall(async (data, context) => {
+  .https.onCall(async (data) => {
     try {
       const query = createRequest(data);
       return await get(query);
