@@ -2,7 +2,6 @@ import * as functions from 'firebase-functions';
 import * as https from 'https';
 
 const API_KEY = functions.config().trafikverket.key;
-const AGENT = new https.Agent({ keepAlive: true });
 const QUERY_OPTIONS = {
   host: 'api.trafikinfo.trafikverket.se',
   path: '/v2/data.json',
@@ -10,7 +9,7 @@ const QUERY_OPTIONS = {
   headers: {
     'Content-Type': 'text/xml',
   },
-  agent: AGENT,
+  agent: new https.Agent({ keepAlive: true }),
 };
 
 export const trafikverket = functions
@@ -18,20 +17,12 @@ export const trafikverket = functions
     maxInstances: 1,
   })
   .region('europe-west1')
-  .https.onRequest(async (request, response) => {
+  .https.onCall(async (data, context) => {
     try {
-      const query = createRequest(request.body);
-      const json = await get(query);
-
-      response.set({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers':
-          'Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin',
-      });
-      response.json(json);
-    } catch {
-      response.sendStatus(500);
+      const query = createRequest(data);
+      return await get(query);
+    } catch (error) {
+      throw new functions.https.HttpsError('unknown', 'Unexpected error');
     }
   });
 
