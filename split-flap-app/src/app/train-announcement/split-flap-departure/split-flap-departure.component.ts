@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { ITheme, THEMES } from 'src/app/core/theme-selector/theme-selector.component';
 import { LoadingService } from 'src/app/core/loading/loading.service';
 import { ITrainStation } from '../interfaces/train-station.interface';
+import { TEMPLATE_NO_DEPARTURE } from './templates/no-departures.template';
 
 @Component({
 	selector: 'app-split-flap-departure',
@@ -84,7 +85,9 @@ export class SplitFlapDepartureComponent {
 			return row;
 		});
 
-		if (rows.length < 10) {
+		if (rows.length === 0) {
+			return TEMPLATE_NO_DEPARTURE;
+		} else if (rows.length < 10) {
 			return [...rows, ...Array(10 - rows.length).fill(Array(46).fill(' '))];
 		} else {
 			return [...rows];
