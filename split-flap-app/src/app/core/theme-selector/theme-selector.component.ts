@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 export interface ITheme {
 	color: string;
@@ -43,6 +43,7 @@ export const THEMES: ITheme[] = [
 	selector: 'app-theme-selector',
 	templateUrl: './theme-selector.component.html',
 	styleUrls: ['./theme-selector.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSelectorComponent {
 	@Input() themes: ITheme[] = THEMES;

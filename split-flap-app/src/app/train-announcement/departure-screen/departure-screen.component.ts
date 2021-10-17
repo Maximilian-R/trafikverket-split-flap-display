@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ElementRef, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { TrainAnnouncement } from '../models/train-announcement.model';
 
 @Component({
 	selector: 'app-departure-screen',
 	templateUrl: './departure-screen.component.html',
 	styleUrls: ['./departure-screen.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DepartureScreenComponent implements OnInit, AfterViewInit {
 	@Input() announcement: TrainAnnouncement;

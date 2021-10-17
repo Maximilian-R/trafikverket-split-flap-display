@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoadingService } from './loading.service';
 import { Observable } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 	selector: 'app-loading',
 	templateUrl: './loading.component.html',
 	styleUrls: ['./loading.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingComponent {
 	public isLoading$: Observable<boolean>;

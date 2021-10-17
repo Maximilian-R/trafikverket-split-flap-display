@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import {
 	IconDefinition,
 	faTimesCircle,
@@ -13,6 +13,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 	selector: 'app-search',
 	templateUrl: './search.component.html',
 	styleUrls: ['./search.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnChanges {
 	faTimesCircle = faTimesCircle;

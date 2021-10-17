@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Flap, Grid } from './flaps/flaps';
 import { SplitFlapAudioService } from './split-flap-audio.service';
 import { ITheme } from '../core/theme-selector/theme-selector.component';
@@ -9,6 +9,7 @@ import { TEMPLATE_EMPTY_GRID } from './templates/empty-grid.template';
 	selector: 'app-split-flap',
 	templateUrl: './split-flap.component.html',
 	styleUrls: ['./split-flap.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitFlapComponent implements OnInit, OnChanges {
 	@Input() data: ISplitFlapInput;
