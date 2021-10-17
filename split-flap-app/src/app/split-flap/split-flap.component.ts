@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Flap, Grid } from './flaps/flaps';
 import { SplitFlapAudioService } from './split-flap-audio.service';
 import { ITheme } from '../core/theme-selector/theme-selector.component';
@@ -30,7 +30,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 	private timeout2: any;
 	private flipTime: number = 30;
 
-	constructor(private SplitFlapAudioService: SplitFlapAudioService) {}
+	constructor(private ref: ChangeDetectorRef, private SplitFlapAudioService: SplitFlapAudioService) {}
 
 	ngOnInit(): void {}
 
@@ -80,6 +80,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 				this.flaps.forEach((flap) => {
 					flap.next = Flap.next(flap.current);
 				});
+				this.ref.detectChanges();
 			}, this.flipTime);
 			this.timeout2 = setTimeout(() => {
 				this.timeout2 = undefined;
@@ -87,6 +88,7 @@ export class SplitFlapComponent implements OnInit, OnChanges {
 					flap.current = flap.next;
 				});
 				this.flipper();
+				this.ref.detectChanges();
 			}, this.flipTime * 2);
 		}
 	}
