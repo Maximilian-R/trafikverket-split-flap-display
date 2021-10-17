@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TrafikverketApiService } from '../api/trafikverket-api.service';
 import { TrainAnnouncements } from '../models/train-announcement.model';
 import { timer, Observable, Subject } from 'rxjs';
@@ -14,21 +14,21 @@ import { TEMPLATE_DEPARTURE } from './templates/departure.template';
 	selector: 'app-split-flap-departure',
 	templateUrl: './split-flap-departure.component.html',
 	styleUrls: ['./split-flap-departure.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [DatePipe],
 })
 export class SplitFlapDepartureComponent {
 	@Input() set trainStation(trainStation: ITrainStation) {
 		if (trainStation) {
-			this.trainStation$.next(trainStation);
+			this.signature$.next(trainStation.LocationSignature);
 		}
 	}
-	private trainStation$: Subject<ITrainStation> = new Subject();
+	private signature$: Subject<string> = new Subject();
 	private refresh$: Subject<void> = new Subject();
 
-	public announcements: TrainAnnouncements = [];
-	public data: ISplitFlapInput;
 	public theme: ITheme = THEMES[4];
 	public isLoading$: Observable<boolean>;
+	public data$: Observable<{ all: TrainAnnouncements; data: ISplitFlapInput }>;
 
 	constructor(
 		private trafikverketApiService: TrafikverketApiService,
@@ -36,28 +36,26 @@ export class SplitFlapDepartureComponent {
 		private loadingService: LoadingService
 	) {
 		this.isLoading$ = this.loadingService.isLoading();
-		const trigger$ = this.trainStation$.pipe(map((trainStation) => trainStation.LocationSignature));
-		trigger$
-			.pipe(
-				switchMap((signature) => {
-					return this.refresh$.pipe(
-						startWith(0),
-						switchMap(() => timer(0, 60000)),
-						map(() => signature)
-					);
-				}),
-				switchMap((signature) => {
-					return this.trafikverketApiService.getTrainAnnouncements([signature]);
-				})
-			)
-			.subscribe((announcements) => {
-				this.announcements = announcements;
-				this.data = TEMPLATE_DEPARTURE(announcements, this.datePipe);
-			});
-	}
-
-	public setStation(station: ITrainStation) {
-		this.trainStation = station;
+		this.data$ = this.signature$.pipe(
+			switchMap((signature) => {
+				return this.refresh$.pipe(
+					startWith(0),
+					switchMap(() => timer(0, 60000)),
+					map(() => signature)
+				);
+			}),
+			switchMap((signature) => {
+				return this.trafikverketApiService.getTrainAnnouncements([signature]).pipe(
+					map((announcements) => {
+						return {
+							all: announcements,
+							data: TEMPLATE_DEPARTURE(announcements, this.datePipe),
+						};
+					})
+				);
+			}),
+			startWith({ all: [], data: undefined })
+		);
 	}
 
 	public refresh() {

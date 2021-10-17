@@ -14,7 +14,7 @@
 		(cleared)="clear()"
 		(submitted)="select()"
 		[placeholder]="'Sök station'"
-		[valid]="valid"
+		[valid]="isValid"
 		[loading]="isSearching"
 		[error]="isError"
 		(input)="input($event.target.value)"

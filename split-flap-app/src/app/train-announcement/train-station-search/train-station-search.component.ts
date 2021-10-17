@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { TrafikverketApiService } from '../api/trafikverket-api.service';
 import { Subject, of, merge } from 'rxjs';
 import { switchMap, map, debounceTime, distinctUntilChanged, tap, catchError } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { ITrainStation, ITrainStations } from '../interfaces/train-station.inter
 	selector: 'app-train-station-search',
 	templateUrl: './train-station-search.component.html',
 	styleUrls: ['./train-station-search.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainStationSearchComponent {
 	filter$ = new Subject<string>();
@@ -23,18 +24,17 @@ export class TrainStationSearchComponent {
 
 	selected: number | undefined;
 
-	valid: boolean;
-
 	lastSelected: ITrainStation;
 
-	isSearching: boolean = false;
+	isValid: boolean;
 
-	isError: boolean = false;
+	isSearching: boolean;
+
+	isError: boolean;
 
 	@Output() selectedTrainStation: EventEmitter<ITrainStation> = new EventEmitter();
 
-	// TODO: Test when there is a slow response from api service
-	constructor(private trafikverketApiService: TrafikverketApiService) {
+	constructor(private ref: ChangeDetectorRef, private trafikverketApiService: TrafikverketApiService) {
 		merge(
 			this.filter$.pipe(
 				distinctUntilChanged(),
@@ -62,11 +62,14 @@ export class TrainStationSearchComponent {
 					return [];
 				})
 			)
-		).subscribe((hits) => (this.hits = hits));
+		).subscribe((hits) => {
+			this.hits = hits;
+			this.ref.detectChanges();
+		});
 	}
 
 	public input(value: string) {
-		this.valid = undefined;
+		this.isValid = undefined;
 		this.selected = undefined;
 		this.lastTyped = value;
 		this.search = value;
@@ -75,26 +78,25 @@ export class TrainStationSearchComponent {
 
 	public preselect(index: number | undefined): void {
 		this.selected = index;
-		if (this.selected !== undefined) {
-			this.search = this.hits[this.selected]?.AdvertisedLocationName;
-		} else {
+		if (this.selected === undefined) {
 			this.search = this.lastTyped;
+		} else {
+			this.search = this.hits[this.selected]?.AdvertisedLocationName;
 		}
 	}
 
 	public select(): void {
 		if (this.hits.length > 0 && this.selected === undefined) {
-			// select first
 			this.preselect(0);
 		}
 
 		if (this.selected === undefined) {
-			// nothing found, error?
-			this.valid = this.search.length === 0 ? undefined : !this.search;
+			this.isValid = this.search.length === 0 ? undefined : !this.search;
 			return;
+		} else {
+			this.isValid = true;
 		}
 
-		this.valid = true;
 		const toSelect = this.hits[this.selected];
 
 		if (this.lastSelected?.LocationSignature === toSelect?.LocationSignature) {
@@ -117,9 +119,9 @@ export class TrainStationSearchComponent {
 	}
 
 	public clear(): void {
-		this.valid = undefined;
-		this.search = '';
+		this.isValid = undefined;
 		this.selected = undefined;
+		this.search = '';
 		this.lastTyped = '';
 		this.selected$.next();
 	}

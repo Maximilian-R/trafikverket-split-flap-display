@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { ISplitFlapInput } from '../flaps/flap.interface';
 import { ISplitFlapTestCase, SplitFlapFlightTest, SplitFlapAnimationTest } from './split-flap-test-cases';
 
@@ -6,6 +6,7 @@ import { ISplitFlapTestCase, SplitFlapFlightTest, SplitFlapAnimationTest } from 
 	selector: 'app-split-flap-example',
 	templateUrl: './split-flap-example.component.html',
 	styleUrls: ['./split-flap-example.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitFlapExampleComponent implements OnInit {
 	public data: ISplitFlapInput;

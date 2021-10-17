@@ -1,21 +1,23 @@
-<app-split-flap [hoverTheme]="theme" [data]="data" [rows]="10" [columns]="46" [dividers]="[5, 20, 25, 28, 33, 45, 46]">
-	<caption>
-		<label>Avgående</label>
-		<span>&nbsp;</span>
-		<label class="EN">Departures</label>
-		<div class="loading-icon" [class.load]="isLoading$ | async" title="Refresh" (click)="refresh()"></div>
-	</caption>
-	<tr>
-		<th><label>Avgång</label><label class="EN">Departure</label></th>
-		<th><label>Till</label><label class="EN">To</label></th>
-		<th><label>Ny Tid</label><label class="EN">New Time</label></th>
-		<th><label>Spår</label><label class="EN">Track</label></th>
-		<th><label>Tågnr</label><label class="EN">Train</label></th>
-		<th><label>Anmärkning</label><label class="EN">Remark</label></th>
-	</tr>
-</app-split-flap>
+<ng-container *ngIf="data$ | async as data">
+	<app-split-flap [hoverTheme]="theme" [data]="data.data" [rows]="10" [columns]="46" [dividers]="[5, 20, 25, 28, 33, 45, 46]">
+		<caption>
+			<label>Avgående</label>
+			<span>&nbsp;</span>
+			<label class="EN">Departures</label>
+			<div class="loading-icon" [class.load]="isLoading$ | async" title="Refresh" (click)="refresh()"></div>
+		</caption>
+		<tr>
+			<th><label>Avgång</label><label class="EN">Departure</label></th>
+			<th><label>Till</label><label class="EN">To</label></th>
+			<th><label>Ny Tid</label><label class="EN">New Time</label></th>
+			<th><label>Spår</label><label class="EN">Track</label></th>
+			<th><label>Tågnr</label><label class="EN">Train</label></th>
+			<th><label>Anmärkning</label><label class="EN">Remark</label></th>
+		</tr>
+	</app-split-flap>
 
-<div class="grid">
-	<app-departure-screen [announcement]="announcements[0]"></app-departure-screen>
-	<app-departure-screen [announcement]="announcements[1]"></app-departure-screen>
-</div>
+	<div class="grid">
+		<app-departure-screen [announcement]="data.all[0]"></app-departure-screen>
+		<app-departure-screen [announcement]="data.all[1]"></app-departure-screen>
+	</div>
+</ng-container>
