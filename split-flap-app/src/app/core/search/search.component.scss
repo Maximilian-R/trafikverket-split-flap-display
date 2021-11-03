@@ -54,6 +54,7 @@ input {
 	border: none;
 	background: none;
 	color: var(--placeholder-color);
+	text-overflow: ellipsis;
 
 	&::placeholder {
 		color: var(--placeholder-color);
