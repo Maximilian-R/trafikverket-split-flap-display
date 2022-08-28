@@ -10,6 +10,30 @@ body {
 	font-size: 16px;
 
 	background-color: var(--bg-color);
+	max-width: 100vw;
+	min-height: 100vh;
+}
+
+body {
+	position: relative;
+	overflow-x: hidden;
+
+	&:focus-within .image-container::before {
+		transform: scale(1.2);
+	}
+}
+
+.image-container::before {
+	content: '';
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background: url('https://images.unsplash.com/photo-1565900290200-52daa0c9faec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2065&q=80');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 0%;
+	transition: transform 250ms ease-in-out;
 }
 
 table,
@@ -23,8 +47,8 @@ button {
 }
 
 h1 {
-	font-size: 3em;
-	font-weight: 200;
+	font-size: clamp(2rem, 3vw, 3rem);
+	font-weight: 500;
 }
 
 :root {
@@ -32,8 +56,8 @@ h1 {
 	--text-color: #000000;
 	--text-color-light: #ffffff;
 
-	--input-bg-color: rgb(255, 255, 255, 0.15);
-	--placeholder-color: #ffffff;
+	--input-bg-color: #ffffff;
+	--placeholder-color: #000000;
 	--selected-bg-color: #ccd1df;
 
 	--split-flap-text-color: white;
@@ -59,19 +83,14 @@ h1 {
 }
 
 footer {
+	position: relative;
 	color: var(--text-color-light);
 	font-family: 'Raleway', sans-serif;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-
-	background: url('https://images.unsplash.com/photo-1565900290200-52daa0c9faec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2065&q=80');
-	background-size: cover;
-	background-repeat: no-repeat;
 	width: 100%;
-	height: 20rem;
-	background-position: 50% 100%;
 }
 
 fa-icon {

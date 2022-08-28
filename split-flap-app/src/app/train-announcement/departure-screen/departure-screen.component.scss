@@ -1,5 +1,5 @@
 .departure-sign {
-	font-size: 1rem;
+	font-size: clamp(0.5rem, 1vw, 1rem);
 	margin: 2em;
 	margin-left: auto;
 	margin-right: auto;
@@ -9,7 +9,7 @@
 	background-color: var(--departure-sign-border-color);
 	color: var(--departure-sign-text-color);
 	font-family: 'Roboto Mono', monospace;
-	padding: 1em;
+	padding: 0.4em;
 	border-radius: 0.2em;
 
 	> div {
