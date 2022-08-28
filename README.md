@@ -1,6 +1,6 @@
 # trafikverket-split-flap-display
 
-A recreation of a split flap display in javascript. Featuring real and live data of departing trains in Sweden.
+A recreation of a split flap display in javascript. Featuring live departures of trains in Sweden.
 
 [github-pages](https://maximilian-r.github.io/trafikverket-split-flap-display/) (API currently disabled)
 
